@@ -63,6 +63,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -403,6 +405,16 @@ public class GTUtility {
                 return inputs.getSlots();
             }
         };
+    }
+
+    public static <T> List<T> filterList(Collection<T> collection, Predicate<T> predicate) {
+        List<T> ret = new ArrayList<>();
+        for (T t : collection) {
+            if (predicate.test(t)) {
+                ret.add(t);
+            }
+        }
+        return ret;
     }
 
     /**

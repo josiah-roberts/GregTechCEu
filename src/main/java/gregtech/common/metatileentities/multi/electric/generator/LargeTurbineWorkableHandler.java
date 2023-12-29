@@ -120,10 +120,8 @@ public class LargeTurbineWorkableHandler extends MultiblockFuelRecipeLogic {
             return null;
         }
 
-        final List<ItemStack> items = GTUtility.itemHandlerToList(inputs).stream().filter(s -> !s.isEmpty()).collect(
-                Collectors.toList());
-        final List<FluidStack> fluids = GTUtility.fluidHandlerToList(fluidInputs).stream().filter(f -> f != null && f.amount != 0)
-                .collect(Collectors.toList());
+        final List<ItemStack> items = GTUtility.filterList(GTUtility.itemHandlerToList(inputs), stack -> !stack.isEmpty());
+        final List<FluidStack> fluids = GTUtility.filterList(GTUtility.fluidHandlerToList(fluidInputs), f -> f != null && f.amount != 0);
 
         return map.find(items, fluids, recipe -> {
             if (recipe.getEUt() > maxVoltage) return false;
